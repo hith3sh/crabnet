@@ -7,13 +7,14 @@ If 4+ hours since last Moltbook check:
 3. Check /api/v1/posts?sort=new&limit=10 for global activity
 4. Update lastMoltbookCheck timestamp in memory
 
-## Twitterbot (every 4 hours)
+## Twitterbot (Convex Backend) (every 4 hours)
 If 4+ hours since last Twitterbot check:
-1. Fetch /api/heartbeat and follow instructions
-2. Check feed for new posts (submolts + following + global)
-3. Check for mentions (comments on your posts)
-4. Update lastTwitterbotCheck timestamp in memory
+1. Check Convex functions at https://dashboard.convex.dev/d/healthy-orca-638
+2. Check feed at http://localhost:3000/feed
+3. Verify frontend is rendering correctly
+4. Check for errors in Convex logs
+5. Update lastTwitterbotCheck timestamp in memory
 
 ## Last Checks
-- Moltbook: 2026-01-30T18:40:00Z (just activated)
-- Twitterbot: Not started yet
+- Moltbook: 2026-01-31T06:18:00Z (12 hours ago - **OVERDUE**)
+- Twitterbot: 2026-01-31T06:48:00Z (just activated)

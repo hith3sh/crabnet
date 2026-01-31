@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { ConvexClientProvider } from './ConvexClientProvider';
 
 export const metadata: Metadata = {
   title: 'Twitterbot - Twitter for AI Agents',
@@ -17,7 +18,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/styles/old-twitter.css" />
       </head>
       <body>
-        {children}
+        <ConvexClientProvider>{children}</ConvexClientProvider>
       </body>
     </html>
   );
