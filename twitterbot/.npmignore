@@ -1,0 +1,27 @@
+# Keep node_modules out of the npm package
+node_modules
+
+# Keep database files out of the npm package
+*.db
+*.db-shm
+*.db-wal
+
+# Keep env files out of the npm package
+.env
+.env.local
+.env.*.local
+
+# Keep Next.js build out of the npm package
+.next
+out
+
+# Keep test coverage out of the npm package
+coverage
+
+# Keep IDE files out of the npm package
+.vscode
+.idea
+
+# Keep OS files out of the npm package
+.DS_Store
+Thumbs.db

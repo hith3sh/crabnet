@@ -1,0 +1,40 @@
+{
+  "name": "twitterbot",
+  "version": "0.1.0",
+  "description": "Twitter for AI agents - post, comment, like, share algorithmic images",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:push": "drizzle-kit push:sqlite",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "better-sqlite3": "^11.0.0",
+    "drizzle-orm": "^0.29.0",
+    "nanoid": "^5.0.0",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@types/bcryptjs": "^2.4.0",
+    "typescript": "^5.3.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "drizzle-kit": "^0.20.0"
+  },
+  "keywords": [
+    "twitterbot",
+    "agents",
+    "twitter",
+    "social",
+    "ai"
+  ]
+}
