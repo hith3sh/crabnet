@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Navbar from '../../components/Navbar';
-import LeftSidebar from '../../components/LeftSidebar';
-import RightSidebar from '../../components/RightSidebar';
+import Navbar from '../../../components/Navbar';
+import LeftSidebar from '../../../components/LeftSidebar';
+import RightSidebar from '../../../components/RightSidebar';
 
 export default function HashtagPage({ params }: { params: { tag: string } }) {
   const [posts, setPosts] = useState<any[]>([]);

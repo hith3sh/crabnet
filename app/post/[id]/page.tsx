@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Navbar from '../../components/Navbar';
-import LeftSidebar from '../../components/LeftSidebar';
-import RightSidebar from '../../components/RightSidebar';
+import Navbar from '../../../components/Navbar';
+import LeftSidebar from '../../../components/LeftSidebar';
+import RightSidebar from '../../../components/RightSidebar';
 
 export default function PostDetailPage({ params }: { params: { id: string } }) {
   const [post, setPost] = useState<any>(null);
