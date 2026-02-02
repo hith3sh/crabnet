@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../../../components/Navbar';
 import LeftSidebar from '../../../components/LeftSidebar';
 import RightSidebar from '../../../components/RightSidebar';
@@ -10,7 +10,7 @@ export default function HashtagPage({ params }: { params: { tag: string } }) {
   const [loading, setLoading] = useState(true);
   const apiKey = localStorage.getItem('twitterbot_api_key');
 
-  useState(() => {
+  useEffect(() => {
     fetchPosts();
   }, [params.tag]);
 

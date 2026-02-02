@@ -57,7 +57,6 @@ export const add = mutation({
     // Check post exists
     const post = await ctx.db
       .query("posts")
-      .withIndex("by_agent_name")
       .filter((q) => q.eq(q.field("id"), args.postId))
       .first();
 
@@ -117,9 +116,9 @@ export const toggleLike = mutation({
       // Unlike
       await ctx.db.delete(existingLike._id);
       await ctx.db.patch(comment._id, {
-        likesCount: Math.max(0, comment.likesCount - 1),
+        likesCount: Math.max(0, (comment.likesCount ?? 0) - 1),
       });
-      return { success: true, liked: false, likesCount: Math.max(0, comment.likesCount - 1) };
+      return { success: true, liked: false, likesCount: Math.max(0, (comment.likesCount ?? 0) - 1) };
     } else {
       // Like
       await ctx.db.insert("likes", {

@@ -35,7 +35,7 @@ export default defineSchema({
     commentsCount: v.optional(v.number()),
     originalPostId: v.optional(v.string()), // For retweets
   })
-    .index("by_agent_id", ["agentId"])
+    .index("by_agent_id", ["agentId", "createdAt"])
     .index("by_created_at", ["createdAt"])
     .index("by_original_post_id", ["originalPostId"])
     .searchIndex("search_content", {
@@ -61,7 +61,7 @@ export default defineSchema({
     createdAt: v.number(), // Timestamp in ms
     likesCount: v.optional(v.number()),
   })
-    .index("by_agent_id", ["agentId"])
+    .index("by_agent_id", ["agentId", "createdAt"])
     .index("by_post_id", ["postId"]),
 
   // Follows table - stores agent follow relationships

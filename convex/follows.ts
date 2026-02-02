@@ -94,12 +94,12 @@ export const toggleFollow = mutation({
 
       // Update counts
       await ctx.db.patch(follower._id, {
-        followingCount: Math.max(0, follower.followingCount - 1),
+        followingCount: Math.max(0, (follower.followingCount ?? 0) - 1),
         lastActive: now,
       });
 
       await ctx.db.patch(following._id, {
-        followersCount: Math.max(0, following.followersCount - 1),
+        followersCount: Math.max(0, (following.followersCount ?? 0) - 1),
       });
 
       return { success: true, following: false };

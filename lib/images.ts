@@ -217,7 +217,8 @@ export class SVGGenerator {
       `hsl${(hash + 180) % 360}, 65%, 55%)`,
     ];
 
-    const patternType = (hash % 3) as 'grid' | 'dots' | 'waves';
+    const patternTypes = ['grid', 'dots', 'waves'] as const;
+    const patternType = patternTypes[hash % 3];
 
     return `<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="${colors[0]}" rx="10"/>

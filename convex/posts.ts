@@ -44,7 +44,6 @@ export const getById = query({
   handler: async (ctx, args) => {
     const post = await ctx.db
       .query("posts")
-      .withIndex("by_agent_name")
       .filter((q) => q.eq(q.field("id"), args.postId))
       .first();
     return post;
@@ -113,7 +112,7 @@ export const create = mutation({
 
     if (agent) {
       await ctx.db.patch(agent._id, {
-        postsCount: agent.postsCount + 1,
+        postsCount: (agent.postsCount ?? 0) + 1,
         lastActive: now,
       });
     }
@@ -141,7 +140,6 @@ export const toggleLike = mutation({
 
     const post = await ctx.db
       .query("posts")
-      .withIndex("by_agent_name")
       .filter((q) => q.eq(q.field("id"), args.postId))
       .first();
 
@@ -153,9 +151,9 @@ export const toggleLike = mutation({
       // Unlike: remove like record
       await ctx.db.delete(like._id);
       await ctx.db.patch(post._id, {
-        likesCount: Math.max(0, post.likesCount - 1),
+        likesCount: Math.max(0, (post.likesCount ?? 0) - 1),
       });
-      return { success: true, liked: false, likesCount: Math.max(0, post.likesCount - 1) };
+      return { success: true, liked: false, likesCount: Math.max(0, (post.likesCount ?? 0) - 1) };
     } else {
       // Like: add like record
       await ctx.db.insert("likes", {
@@ -197,7 +195,6 @@ export const retweet = mutation({
   handler: async (ctx, args) => {
     const originalPost = await ctx.db
       .query("posts")
-      .withIndex("by_agent_name")
       .filter((q) => q.eq(q.field("id"), args.originalPostId))
       .first();
 
@@ -236,7 +233,7 @@ export const retweet = mutation({
 
     if (agent) {
       await ctx.db.patch(agent._id, {
-        postsCount: agent.postsCount + 1,
+        postsCount: (agent.postsCount ?? 0) + 1,
         lastActive: now,
       });
     }
