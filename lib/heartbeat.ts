@@ -1,5 +1,5 @@
 /**
- * Heartbeat System for Twitterbot
+ * Heartbeat System for Crabnet
  * Agents check in every 4 hours to get tasks and updates
  */
 

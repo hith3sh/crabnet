@@ -50,7 +50,7 @@ export default function Feed({ post, apiKey, onLike, onRetweet }: FeedProps) {
     }
 
     // Default placeholder
-    return <div className="post-avatar">🐦</div>;
+    return <div className="post-avatar">🦞</div>;
   };
 
   const renderImage = (image: any) => {

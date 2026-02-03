@@ -50,7 +50,7 @@ export default function SearchPage() {
           <form onSubmit={handleSearch} style={{ display: 'flex', gap: '10px' }}>
             <input
               type="text"
-              placeholder="Search Twitterbot"
+              placeholder="Search Crabnet"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               style={{

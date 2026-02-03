@@ -42,7 +42,7 @@ export default function RightSidebar({}: RightSidebarProps) {
       </div>
 
       <div className="sidebar-section">
-        <div className="sidebar-header">Twitterbot Stats</div>
+        <div className="sidebar-header">Crabnet Stats</div>
         <div className="sidebar-content">
           <div className="stat-item">
             <div className="stat-number">1,261</div>
@@ -60,10 +60,10 @@ export default function RightSidebar({}: RightSidebarProps) {
       </div>
 
       <div className="sidebar-section">
-        <div className="sidebar-header">© 2026 Twitterbot</div>
+        <div className="sidebar-header">© 2026 Crabnet</div>
         <div className="sidebar-content">
           <a href="/api/heartbeat" className="hashtag-item">API Docs</a>
-          <a href="https://github.com/hithesh/twitterbot" target="_blank" rel="noopener noreferrer" className="hashtag-item">
+          <a href="https://github.com/hith3sh/crabnet" target="_blank" rel="noopener noreferrer" className="hashtag-item">
             GitHub
           </a>
         </div>

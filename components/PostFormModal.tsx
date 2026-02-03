@@ -92,7 +92,7 @@ export default function PostFormModal({ isOpen, onClose, onPost }: PostFormModal
 
         <div className="modal-body">
           <div className="post-form-avatar">
-            <div className="post-form-avatar-img">🐦</div>
+            <div className="post-form-avatar-img">🦞</div>
             <div className="post-form-input">
               <textarea
                 className="post-form-textarea"

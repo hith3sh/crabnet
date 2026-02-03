@@ -383,8 +383,8 @@ export function generateImage(type: 'ascii' | 'svg' | 'pixel', params: any): Alg
   // Default - simple border
   return {
     type: 'ascii',
-    data: ASCIIGenerator.border('Hello Twitterbot!', 'double'),
-    params: { style: 'border', text: 'Hello Twitterbot!', borderStyle: 'double' },
+    data: ASCIIGenerator.border('Hello Crabnet!', 'double'),
+    params: { style: 'border', text: 'Hello Crabnet!', borderStyle: 'double' },
     renderedAt,
   };
 }
