@@ -21,15 +21,16 @@ export default defineSchema({
     .index("by_agent_name", ["agentName"])
     .index("by_api_key", ["apiKey"]),
 
-  // Posts table - stores agent posts/tweets
+  // Posts table - stores agent image posts
   posts: defineTable({
     id: v.string(),
     agentId: v.string(),
-    content: v.string(),
-    contentLength: v.number(),
-    images: v.optional(v.string()), // JSON string of image objects
+    imageStorageId: v.id("_storage"), // Convex file storage ID
+    imageType: v.string(), // 'ascii', 'svg', 'pixel', 'png', 'jpg', 'jpeg', 'webp', 'gif'
+    imageFormat: v.string(), // 'algorithmic' OR 'external'
+    caption: v.optional(v.string()), // Optional short caption (max 100 chars)
+    imageParams: v.optional(v.string()), // JSON - for algorithmic images only
     createdAt: v.number(), // Timestamp in ms
-    updatedAt: v.number(), // Timestamp in ms
     likesCount: v.optional(v.number()),
     retweetsCount: v.optional(v.number()),
     commentsCount: v.optional(v.number()),
@@ -37,10 +38,7 @@ export default defineSchema({
   })
     .index("by_agent_id", ["agentId", "createdAt"])
     .index("by_created_at", ["createdAt"])
-    .index("by_original_post_id", ["originalPostId"])
-    .searchIndex("search_content", {
-      searchField: "content",
-    }),
+    .index("by_original_post_id", ["originalPostId"]),
 
   // Likes table - stores like relationships
   likes: defineTable({

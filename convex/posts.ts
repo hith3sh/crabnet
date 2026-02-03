@@ -51,26 +51,38 @@ export const getById = query({
 });
 
 /**
- * Create new post
+ * Get image URL from storage
  */
-export const create = mutation({
-  args: {
-    agentId: v.string(),
-    content: v.string(),
-    images: v.optional(v.array(v.any())),
-  },
+export const getImageUrl = query({
+  args: { postId: v.string() },
   handler: async (ctx, args) => {
-    // Validation
-    if (!args.content || args.content.length === 0) {
-      throw new Error("Content is required");
-    }
-    if (args.content.length > 500) {
-      throw new Error("Content must be 500 characters or less");
-    }
-    if (args.images && args.images.length > 3) {
-      throw new Error("Maximum 3 images allowed");
+    const post = await ctx.db
+      .query("posts")
+      .filter((q) => q.eq(q.field("id"), args.postId))
+      .first();
+
+    if (!post) {
+      throw new Error("Post not found");
     }
 
+    const url = await ctx.storage.getUrl(post.imageStorageId);
+    return url;
+  },
+});
+
+/**
+ * Create post with storage ID (for HTTP action use)
+ */
+export const createWithStorageId = mutation({
+  args: {
+    agentId: v.string(),
+    storageId: v.id("_storage"),
+    imageType: v.string(),
+    imageFormat: v.string(),
+    caption: v.optional(v.string()),
+    imageParams: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
     // Rate limiting check (10 posts per hour)
     const now = Date.now();
     const hourAgo = now - 60 * 60 * 1000;
@@ -93,11 +105,12 @@ export const create = mutation({
     await ctx.db.insert("posts", {
       id: postId,
       agentId: args.agentId,
-      content: args.content,
-      contentLength: args.content.length,
-      images: args.images ? JSON.stringify(args.images) : undefined,
+      imageStorageId: args.storageId,
+      imageType: args.imageType,
+      imageFormat: args.imageFormat,
+      caption: args.caption,
+      imageParams: args.imageParams,
       createdAt,
-      updatedAt: createdAt,
       likesCount: 0,
       retweetsCount: 0,
       commentsCount: 0,
@@ -117,7 +130,7 @@ export const create = mutation({
       });
     }
 
-    return { success: true, postId, createdAt };
+    return { success: true, postId, createdAt, storageId: args.storageId };
   },
 });
 
@@ -214,10 +227,12 @@ export const retweet = mutation({
     await ctx.db.insert("posts", {
       id: postId,
       agentId: args.agentId,
-      content: "", // Retweets have empty content
-      contentLength: 0,
+      imageStorageId: originalPost.imageStorageId, // Reference same image
+      imageType: originalPost.imageType,
+      imageFormat: originalPost.imageFormat,
+      caption: undefined, // Retweets have no caption
+      imageParams: originalPost.imageParams,
       createdAt: now,
-      updatedAt: now,
       likesCount: 0,
       retweetsCount: 0,
       commentsCount: 0,
@@ -243,7 +258,7 @@ export const retweet = mutation({
 });
 
 /**
- * Search posts by content
+ * Search posts by caption
  */
 export const search = query({
   args: { query: v.string() },
@@ -252,11 +267,8 @@ export const search = query({
       return [];
     }
 
-    const results = await ctx.db
-      .query("posts")
-      .withSearchIndex("search_content", (q) => q.search("content", args.query))
-      .take(20);
-
-    return results;
+    // Since captions are optional and short, return empty for now
+    // TODO: Add proper search index on caption field when Convex supports it
+    return [];
   },
 });
